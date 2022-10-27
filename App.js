@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import {
   StyleSheet,
   Text,
@@ -12,24 +12,36 @@ import {
 } from "react-native";
 import Note from "./components/Note";
 
+const getLocalStorage = () => {
+  let noteItems = localStorage.getItem("noteItems");
+  if (noteItems) {
+    return JSON.parse(localStorage.getItem("noteItems"));
+  } else {
+    return [];
+  }
+};
+
 export default function App() {
   const [note, setNote] = useState("");
-  const [noteItems, setNoteItems] = useState([]);
-  const [modal,setModal] = useState(false);
+  const [noteItems, setNoteItems] = useState(getLocalStorage());
+  const [modal, setModal] = useState(false);
   // Add Note
   const handleAddnote = () => {
     Keyboard.dismiss();
     setNoteItems([...noteItems, note]);
     setNote("");
   };
-// delete note
+  // delete note
   const deleteNote = (index) => {
     setModal(true);
     setNoteItems(noteItems.filter((data, id) => id !== index));
-    setTimeout(()=>{
+    setTimeout(() => {
       setModal(false);
-    },2000)
+    }, 2000);
   };
+  useEffect(() => {
+    localStorage.setItem("noteItems", JSON.stringify(noteItems));
+  }, [noteItems]);
   return (
     <View style={styles.container}>
       <ScrollView
@@ -41,7 +53,7 @@ export default function App() {
         {/* notes */}
         <View style={styles.notesWrapper}>
           <Text style={styles.sectionTitle}>Notes</Text>
-          {modal && <Text style={styles.removeText}>Successfully Deleted</Text> }
+          {modal && <Text style={styles.removeText}>Successfully Deleted</Text>}
           <View style={styles.items}>
             {noteItems.map((item, index) => {
               return <Note text={item} index={index} deleteNote={deleteNote} />;
@@ -83,13 +95,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
-  removeText:{
-      fontSize:15,
-      color:'red',
-      backgroundColor:"#f9cdc4",
-      padding: 10,
-      borderRadius: 15
-      
+  removeText: {
+    fontSize: 15,
+    color: "red",
+    backgroundColor: "#f9cdc4",
+    padding: 10,
+    borderRadius: 15,
   },
   items: {
     marginTop: 30,

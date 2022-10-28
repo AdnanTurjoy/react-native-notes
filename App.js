@@ -62,10 +62,7 @@ export default function App() {
         </View>
       </ScrollView>
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.writenoteWrapper}
-      >
+      <KeyboardAvoidingView style={styles.writenoteWrapper}>
         <TextInput
           style={styles.input}
           placeholder={"Write a note"}

@@ -2,6 +2,7 @@
   "expo": {
     "name": "react-native-notes",
     "slug": "react-native-notes",
+    "description": "this is description",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

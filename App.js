@@ -1,4 +1,5 @@
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import {
   StyleSheet,
   Text,
@@ -24,7 +25,7 @@ const getLocalStorage = () => {
 export default function App() {
   const [note, setNote] = useState("");
   const [noteItems, setNoteItems] = useState(getLocalStorage());
-  const [modal, setModal] = useState(false);
+
   // Add Note
   const handleAddnote = () => {
     Keyboard.dismiss();
@@ -33,17 +34,16 @@ export default function App() {
   };
   // delete note
   const deleteNote = (index) => {
-    setModal(true);
     setNoteItems(noteItems.filter((data, id) => id !== index));
-    setTimeout(() => {
-      setModal(false);
-    }, 2000);
+    // Modal
+    toast.success("Successfully Deleted!");
   };
   useEffect(() => {
     localStorage.setItem("noteItems", JSON.stringify(noteItems));
   }, [noteItems]);
   return (
     <View style={styles.container}>
+      <Toaster position="top-center" reverseOrder={false} />
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
@@ -53,7 +53,7 @@ export default function App() {
         {/* notes */}
         <View style={styles.notesWrapper}>
           <Text style={styles.sectionTitle}>Notes</Text>
-          {modal && <Text style={styles.removeText}>Successfully Deleted</Text>}
+
           <View style={styles.items}>
             {noteItems.map((item, index) => {
               return <Note text={item} index={index} deleteNote={deleteNote} />;
@@ -114,10 +114,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   input: {
-    paddingVertical: 15,
-    paddingHorizontal: 15,
+    paddingVertical: 35,
+    paddingHorizontal: 25,
     backgroundColor: "#FFF",
-    borderRadius: 60,
+    borderRadius: 30,
     borderColor: "#C0C0C0",
     borderWidth: 1,
     width: 250,

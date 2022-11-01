@@ -1,52 +1,55 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { AiFillDelete } from "react-icons/ai";
+import styled from "styled-components/native";
+
+const SingleItem = styled.View`
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+const ItemLeft = styled.View`
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
+const Square = styled.View`
+  width: 24px;
+  height: 24px;
+  background-color: #55bcf6;
+  opacity: 0.4;
+  border-radius: 5px;
+  margin-right: 15px;
+`;
+
+const ItemText = styled.Text`
+  max-width: 80%;
+`;
+
+// const AiFillDelete = styled.AiFillDelete`
+//   width: 17px;
+//   height: 17px;
+//   color: red;
+// `;
 const Note = (props) => {
-  
   return (
-    <View style={styles.item}>
-      <View style={styles.itemLeft}>
-        <View style={styles.square}></View>
-        <Text style={styles.itemText}>{props.text}</Text>
-      </View>
+    <SingleItem>
+      <ItemLeft>
+        <Square></Square>
+        <ItemText>{props.text}</ItemText>
+      </ItemLeft>
       <TouchableOpacity onPress={() => props.deleteNote(props.index)}>
-        <AiFillDelete style={styles.delete} />
+        <AiFillDelete style={{ width: 17, height: 17, color: "red" }} />
       </TouchableOpacity>
-    </View>
+    </SingleItem>
   );
 };
 
-const styles = StyleSheet.create({
-  item: {
-    backgroundColor: "#FFF",
-    padding: 15,
-    borderRadius: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
-  itemLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "wrap",
-  },
-  square: {
-    width: 24,
-    height: 24,
-    backgroundColor: "#55BCF6",
-    opacity: 0.4,
-    borderRadius: 5,
-    marginRight: 15,
-  },
-  itemText: {
-    maxWidth: "80%",
-  },
-  delete: {
-    width: 17,
-    height: 17,
-    color: "red",
-  },
-});
 
 export default Note;

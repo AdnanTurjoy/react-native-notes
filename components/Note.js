@@ -4,7 +4,7 @@ import { AiFillDelete } from "react-icons/ai";
 import styled from "styled-components/native";
 
 const SingleItem = styled.View`
-  background-color: #fff;
+  background-color: ${ (props)=> props.isEnabled ? "#9E9897" : "#fff"};
   padding: 15px;
   border-radius: 10px;
   flex-direction: row;
@@ -22,7 +22,7 @@ const ItemLeft = styled.View`
 const Square = styled.View`
   width: 24px;
   height: 24px;
-  background-color: #55bcf6;
+  background-color: ${ (props)=> props.isEnabled ? "#0698F7" : "#55bcf6"} ;
   opacity: 0.4;
   border-radius: 5px;
   margin-right: 15px;
@@ -30,6 +30,8 @@ const Square = styled.View`
 
 const ItemText = styled.Text`
   max-width: 80%;
+  font-weight: bold;
+  color: ${ (props)=> props.isEnabled ? "white" : "black"}
 `;
 
 // const AiFillDelete = styled.AiFillDelete`
@@ -39,13 +41,13 @@ const ItemText = styled.Text`
 // `;
 const Note = (props) => {
   return (
-    <SingleItem>
+    <SingleItem isEnabled={props.isEnabled}>
       <ItemLeft>
-        <Square></Square>
-        <ItemText>{props.text}</ItemText>
+        <Square isEnabled={props.isEnabled}></Square>
+        <ItemText isEnabled={props.isEnabled}>{props.text}</ItemText>
       </ItemLeft>
       <TouchableOpacity onPress={() => props.deleteNote(props.index)}>
-        <AiFillDelete style={{ width: 17, height: 17, color: "red" }} />
+        <AiFillDelete style={{ width: 18, height: 18, color: "#F73B28" }} />
       </TouchableOpacity>
     </SingleItem>
   );

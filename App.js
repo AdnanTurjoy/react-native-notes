@@ -10,7 +10,11 @@ import {
   ScrollView,
   Platform,
   Keyboard,
+  Button,
+  Image,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CgDarkMode } from "react-icons/cg";
 // import styled from "styled-components/native";
 import Note from "./components/Note";
@@ -33,9 +37,8 @@ const getLocalStorage = () => {
     return [];
   }
 };
-// styled components
 
-export default function App() {
+function NotesScreen() {
   const [note, setNote] = useState("");
   const [noteItems, setNoteItems] = useState(getLocalStorage());
   const [isEnabled, setIsEnabled] = useState(false);
@@ -61,16 +64,15 @@ export default function App() {
   }, [noteItems]);
   return (
     <Container isEnabled={isEnabled}>
-      <Toaster position="top-center" reverseOrder={false} />
-      <TouchableOpacity style={{alignContent:"center"}}>
-            {/* <SectionTitle isEnabled={isEnabled}>Mode: </SectionTitle> */}
-            <DarkModeSwitch
-              style={{ marginBottom: "2rem" }}
-              checked={isEnabled}
-              onClick={toggleSwitch}
-              size={40}
-            />
-          </TouchableOpacity>
+      <TouchableOpacity style={{ flex:1, alignItems:"center", justifyContent:"center", }}>
+        {/* <SectionTitle isEnabled={isEnabled}>Mode: </SectionTitle> */}
+        <DarkModeSwitch
+          // style={{ marginBottom: "1rem" }}
+          checked={isEnabled}
+          onClick={toggleSwitch}
+          size={40}
+        />
+      </TouchableOpacity>
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
@@ -81,7 +83,6 @@ export default function App() {
         <NotesWrapper>
           <SectionTitle isEnabled={isEnabled}>Notes</SectionTitle>
           {/* dark mode */}
-         
 
           <Items>
             {noteItems.map((item, index) => {
@@ -112,5 +113,50 @@ export default function App() {
         </TouchableOpacity>
       </WritenoteWrapper>
     </Container>
+  );
+}
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{flex:1, alignItems:"center", justifyContent:"center"}}>
+      <Image
+        source={{
+          uri: "https://img.freepik.com/premium-vector/notepad-spring-note-book-doodle-line-cartoon_253359-2047.jpg",
+        }}
+        style={{ width: 200, height: 200 }}
+      />
+      <Button
+        title="Enter"
+        onPress={() => navigation.navigate("NotesScreen")}
+      />
+    </View>
+  );
+}
+
+export default function App() {
+  const Stack = createNativeStackNavigator();
+
+  return (
+    <NavigationContainer>
+      <Toaster position="top-right" reverseOrder={false} />
+      <Stack.Navigator>
+        {/* <Stack.Screen
+          name="Wellcome"
+          component={App}
+          options={{ title: "Welcome" }}
+        /> */}
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Home" }}
+        />
+        <Stack.Screen
+          name="NotesScreen"
+          component={NotesScreen}
+          options={{ title: "Adnan Native Notes" }}
+        />
+        {/* <Button title="Enter" onPress={()=>navigation.navigate('Home')} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

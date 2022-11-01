@@ -5,16 +5,16 @@ export const Container = styled.View`
   background-color: ${(props) => (props.isEnabled ? "#494B4C " : "#e8eaed")};
 `;
 export const NotesWrapper = styled.View`
-  padding-top: 80px;
-  padding-horizontal: 20px;
+  padding-top: 5px;
+  padding-horizontal: 10px;
 `;
 export const SectionTitle = styled.Text`
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
   color: ${(props) => (props.isEnabled ? "white" : "black")};
 `;
 export const Items = styled.View`
-  margin-top: 30px;
+  margin-top: 5px;
 `;
 
 export const Input = styled.TextInput`
@@ -37,6 +37,7 @@ export const AddWrapper = styled.View`
   align-items: center;
   border-color: #c0c0c0;
   border-width: 1px;
+  
 `;
 
 export const AddText = styled.Text`

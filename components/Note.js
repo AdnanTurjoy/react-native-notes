@@ -2,9 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { AiFillDelete } from "react-icons/ai";
 import styled from "styled-components/native";
-
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const SingleItem = styled.View`
-  background-color: ${ (props)=> props.isEnabled ? "#9E9897" : "#fff"};
+  background-color: ${(props) => (props.isEnabled ? "#9E9897" : "#fff")};
   padding: 15px;
   border-radius: 10px;
   flex-direction: row;
@@ -22,7 +23,7 @@ const ItemLeft = styled.View`
 const Square = styled.View`
   width: 24px;
   height: 24px;
-  background-color: ${ (props)=> props.isEnabled ? "#0698F7" : "#55bcf6"} ;
+  background-color: ${(props) => (props.isEnabled ? "#0698F7" : "#55bcf6")};
   opacity: 0.4;
   border-radius: 5px;
   margin-right: 15px;
@@ -31,7 +32,7 @@ const Square = styled.View`
 const ItemText = styled.Text`
   max-width: 80%;
   font-weight: bold;
-  color: ${ (props)=> props.isEnabled ? "white" : "black"}
+  color: ${(props) => (props.isEnabled ? "white" : "black")};
 `;
 
 // const AiFillDelete = styled.AiFillDelete`
@@ -52,6 +53,5 @@ const Note = (props) => {
     </SingleItem>
   );
 };
-
 
 export default Note;

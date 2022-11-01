@@ -37,13 +37,18 @@ export const AddWrapper = styled.View`
   align-items: center;
   border-color: #c0c0c0;
   border-width: 1px;
-  
 `;
 
 export const AddText = styled.Text`
   color: ${(props) => (props.isEnabled ? "#fff" : "black")};
-  
 `;
+
+export const DarkMode = styled.TouchableOpacity`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const WritenoteWrapper = styled.KeyboardAvoidingView`
   position: absolute;
   bottom: 60px;

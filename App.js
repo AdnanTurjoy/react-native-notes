@@ -22,6 +22,7 @@ import {
   AddText,
   AddWrapper,
   Container,
+  DarkMode,
   Input,
   Items,
   NotesWrapper,
@@ -37,7 +38,7 @@ const getLocalStorage = () => {
     return [];
   }
 };
-
+// Note Screen
 function NotesScreen() {
   const [note, setNote] = useState("");
   const [noteItems, setNoteItems] = useState(getLocalStorage());
@@ -64,7 +65,7 @@ function NotesScreen() {
   }, [noteItems]);
   return (
     <Container isEnabled={isEnabled}>
-      <TouchableOpacity style={{ flex:1, alignItems:"center", justifyContent:"center", }}>
+      <DarkMode >
         {/* <SectionTitle isEnabled={isEnabled}>Mode: </SectionTitle> */}
         <DarkModeSwitch
           // style={{ marginBottom: "1rem" }}
@@ -72,7 +73,7 @@ function NotesScreen() {
           onClick={toggleSwitch}
           size={40}
         />
-      </TouchableOpacity>
+      </DarkMode>
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
@@ -115,7 +116,7 @@ function NotesScreen() {
     </Container>
   );
 }
-
+// home
 function HomeScreen({ navigation }) {
   return (
     <View style={{flex:1, alignItems:"center", justifyContent:"center"}}>
